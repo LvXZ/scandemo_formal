@@ -765,16 +765,18 @@ public class MainActivity extends Activity {
                     }break;
 
                     case 3001: {//入库单
-                        /*flag = 1;
+                        flag = 1;
                         moreShow = 1;
                         getTable = getID;
-                        methodShow = 1;*/
-                        inOne_getQueryItem(getTable,getID);
-                        //getQueryItem("special_in_query",getTable);
-                        /*if(error_flag == 0){//无错误
+                        methodShow = 1;
+                        getQueryItem("special_in_query",getTable);
+                        if(error_flag == 0){//无错误
                             flagScan = 3002; //开始单个入库
                             notice_toast(Notice.Display_InputDatabase + Notice.Activation);//入库已激活
-                        }*/
+                        }
+
+
+
                     }break;
 
                     case 3002: {//单物品入库
@@ -979,11 +981,22 @@ public class MainActivity extends Activity {
 
         /**货物逐个入库函数--入库调用**/
         void inOne_getQueryItem(String getTable_now,String getID_now){
-            /*flag = 1;
-            moreShow = 1;
-            getQueryItem("special_in_query");
-            notice_toast(Notice.Display_InputDatabase + Notice.Display_Over);//提示输出*/
-            notice_toast("暂未实现功能");
+
+
+            ItemService itemService = new ItemServiceImpl();
+            ServiceInfoDTO serviceInfoDTO = itemService.executeIn(getTable_now,getID_now);
+            if(serviceInfoDTO.getCode() == 1){//ok
+                flag = 1;
+                moreShow = 1;
+                //刷新UI
+                getQueryItem("special_in_query",getTable_now);
+                notice_toast(serviceInfoDTO.getMsg());//入库已完成
+            }else{
+                notice_toast(serviceInfoDTO.getMsg());//入库错误
+            }
+
+
+
         }
 
         /**货物数据更新函数--报完工查询调用**/

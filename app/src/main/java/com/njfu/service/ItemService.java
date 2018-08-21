@@ -54,4 +54,12 @@ public interface ItemService {
      * @return ServiceInfoDTO
      */
     ServiceInfoDTO executeOut(String getTable,String getID);
+
+    /**
+     * 执行配套入库
+     * @param getTable
+     * @param getID
+     * @return ServiceInfoDTO
+     */
+    ServiceInfoDTO executeIn(String getTable,String getID);
 }

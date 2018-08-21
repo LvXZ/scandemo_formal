@@ -187,15 +187,16 @@ public class ItemDaoImpl implements ItemDao{
         List<Item> itemList =null;
         try{
             conn = JdbcUtil.getConnection();
-            stmt = conn.prepareStatement("select tiitm001.item,tiitm001.dsca,tdilc401.qsts,tdilc401.cwar, tdilc401.proc " +
-                    "from tdilc401,tiitm001 where orno = (select pdno from tisfc001 where pdnos = ?) and "
-                    + "tdilc401.proc = '0' and tiitm001.item = tdilc401.item");
+            stmt = conn.prepareStatement("select t2.item,t3.dsca,t2.cwar,t2.oqua,t2.dqua " +
+                    "from tdpur040 t1, tdpur041 t2, tiitm001 t3 " +
+                    "where t2.orno = t1.orno and  t1.orno = ? and t2.item = t3.item and t2.bqua > 0");
             stmt.setString(1, pdnos);
             rs = stmt.executeQuery();
             itemList = new ArrayList<>();
             while(rs.next()){
                 //构造对象
-                Item item = new Item(rs.getString("item"), rs.getString("dsca"), rs.getString("cwar"), String.valueOf(rs.getDouble(3)), rs.getDouble(3),"入库");
+                Item item = new Item(rs.getString("item"), rs.getString("dsca"), rs.getString("cwar"), String.valueOf(rs.getDouble(4)), rs.getDouble(5),"入库");
+
                 //System.out.println("name" + item.getName_item());
                 itemList.add(item);
             }
@@ -382,6 +383,53 @@ public class ItemDaoImpl implements ItemDao{
             }
         }
         return 1;//正确
+    }
+
+    @Override
+    public int executeIn(String getTable, String getID, Connection conn) {
+
+        //用queryAll
+        PreparedStatement stmt = null;
+        // 0 错误， 1成功
+        int flag = 0;
+
+        try{
+            conn = JdbcUtil.getConnection();
+            stmt = conn.prepareStatement("update tdpur041 " +
+                    "set dqua = oqua, bqua = 0 " +
+                    "where item = ? and orno = (select orno from tdpur040 where orno = ?) ");
+
+
+            stmt.setString(1, getID);
+            stmt.setString(2, getTable);
+
+
+            System.out.println("---1---");
+            flag = stmt.executeUpdate();
+            System.out.println("---2---");
+
+        }catch(Exception e){
+            System.out.println("error..."+e.toString());
+            return 0;
+        }finally{
+            if(stmt!=null){
+                try{
+                    stmt.close();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if(conn!=null){
+                try{
+                    conn.close();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return flag;
+        }
+
     }
 
 }

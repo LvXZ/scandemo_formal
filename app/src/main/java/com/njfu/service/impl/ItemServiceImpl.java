@@ -134,4 +134,52 @@ public class ItemServiceImpl implements ItemService {
 
         return serviceInfoDTO;
     }
+
+    @Override
+    public ServiceInfoDTO executeIn(String getTable, String getID) {
+
+        ServiceInfoDTO serviceInfoDTO;
+        Connection connection = null;
+        try {
+            connection = JdbcUtil.getConnection();
+
+            int processReturn = dao.executeIn(getTable, getID, connection);
+            switch(processReturn) {
+                case 1:{
+                    connection.commit();
+                    serviceInfoDTO = new ServiceInfoDTO(1,Notice.Display_InputDatabase + Notice.Display_Over,1);
+                    Log.i(Constant.TAG, "<-------------All done----------->");
+                }break;
+
+                //错误
+                case 0:{
+                    connection.rollback();
+                    serviceInfoDTO = new ServiceInfoDTO(-1,"入库发生错误");
+                    Log.i(Constant.TAG, "<-------------Sql error----------->");
+                }break;
+
+                default:{
+                    connection.rollback();
+                    serviceInfoDTO = new ServiceInfoDTO(-1,"入库未知错误");
+                }
+
+            }
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            serviceInfoDTO = new ServiceInfoDTO(-1,"数据库连接错误");
+        }finally {
+            if(connection!=null){
+                try{
+                    connection.close();
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return serviceInfoDTO;
+
+    }
 }
