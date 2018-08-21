@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/output_item"
+        android:title="@string/OutputDatabase"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/input_item"
+        android:title="@string/InputDatabase"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="never"
+        />
+    <item
+        android:id="@+id/IP_item"
+        android:title="@string/IP_address"
+        android:orderInCategory="100"
+        android:visible="false"
+        app:showAsAction="never"
+        />
+</menu>

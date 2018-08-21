@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">普云智造</string>
+
+    <string name="login">  普云智造    未登录</string>
+    <string name="method">  请先登录激活功能 </string>
+    <string name="SingleButton">查询</string>
+    <string name="Finished">报完工</string>
+    <string name="Functions">出/入库</string>
+
+    <string name="OutputDatabase">出库</string>
+    <string name="InputDatabase">入库</string>
+    <string name="IP_address">IP</string>
+
+    <string name="Query_one_item">物料码</string>
+    <string name="Query_out_list">出库单</string>
+    <string name="Query_in_list">入库单</string>
+    <string name="Query_finish_list">报完工单</string>
+
+</resources>
