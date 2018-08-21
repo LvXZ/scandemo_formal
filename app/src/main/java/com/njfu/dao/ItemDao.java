@@ -55,4 +55,14 @@ public interface ItemDao {
      */
     int executeOut(String getTable,String getID,Connection conn);
 
+
+    /**
+     * 执行配套入库
+     * @param getTable
+     * @param getID
+     * @param conn
+     * @return int
+     */
+    int executeIn(String getTable,String getID,Connection conn);
+
 }

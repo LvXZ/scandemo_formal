@@ -7,6 +7,8 @@ package com.njfu.entity;
  * itemID   :物流编号
  * location :创库位置
  * amount   :剩余数量
+ * amount_in:已经入库的数量（交货数量）
+ * in_out 如果是出库，则代表源仓库中剩余物料的数量，如果是入库，则代表目标仓库已入库（交货)的数量
  */
 public class Item {
 
@@ -14,7 +16,8 @@ public class Item {
     private String name_item;
     private String location;
     private String amount;
-    private String amount_in;
+
+
     private double in_out;
     private String select;
 
@@ -85,18 +88,21 @@ public class Item {
         return "未出库";
     }
 
-    public String showPosition3(){
-        if(in_out ==0 )
-            return "未入库";
+    public String showPosition3(double bqua) {
 
-        return "已入库";
+        if(bqua == 0){
+            return "已全部入库";
+        }else{
+            return "未入库"+ bqua;
+        }
+
     }
 
     public String selectShow(){
         if(select.equals("出库")) {
             return showPosition2();
         }else if(select.equals("入库")){
-            return showPosition3();
+            return showPosition3(Double.valueOf(amount)-in_out);
         }else{
             return "";
         }
