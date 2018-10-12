@@ -85,7 +85,8 @@ public class ItemServiceImpl implements ItemService {
 
         ServiceInfoDTO serviceInfoDTO;
         List<Item> itemList = dao.queryInAll(pdnos);
-        if(itemList.size() == 0){
+
+        if(itemList == null || itemList.size() == 0  ){
             serviceInfoDTO = new ServiceInfoDTO(-1,Notice.Get_DB_Items_Failure);
         }else{
             serviceInfoDTO = new ServiceInfoDTO(1,"成功",itemList);
