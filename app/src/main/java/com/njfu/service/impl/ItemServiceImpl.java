@@ -319,12 +319,13 @@ public class ItemServiceImpl implements ItemService {
             invInventory.setCopr(istr_mo.getCopr());
             //istr_mo.getIsFree();istr_mo.getProjectNo();运用时，借用istr_mo的字段
 
-            if(invInventoryUpdate() !=0 ){
+            /*if(invInventoryUpdate() !=0 ){
                 return new ServiceInfoDTO(-1,"");
-            }
+            }*/
 
             return new ServiceInfoDTO(0,"");
         }
+        return null;
 
     }
 
@@ -357,6 +358,6 @@ public class ItemServiceImpl implements ItemService {
 
 
     public ServiceInfoDTO invProcIn(InvMoveOrderView istr_mo_view){
-
+        return null;
     }
 }

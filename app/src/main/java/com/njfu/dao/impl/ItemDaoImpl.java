@@ -462,7 +462,7 @@ public class ItemDaoImpl implements ItemDao{
             rs = stmt.executeQuery();
             if(rs.next()){
                 //构造对象
-                invMoveOrder = new InvMoveOrder(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getShort(14),rs.getShort(15));
+                invMoveOrder = new InvMoveOrder(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getBigDecimal(14),rs.getBigDecimal(15));
                 System.out.println("status" + invMoveOrder.getOrderStatus());
                 invMoveOrder.setFlagCode(1);
                 return invMoveOrder;
