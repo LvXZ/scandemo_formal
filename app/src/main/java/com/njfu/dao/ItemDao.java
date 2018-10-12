@@ -1,7 +1,11 @@
 package com.njfu.dao;
 
+import com.njfu.entity.InvInventory;
+import com.njfu.entity.InvMoveOrder;
+import com.njfu.entity.InvMoveOrderView;
 import com.njfu.entity.Item;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.util.List;
 
@@ -65,4 +69,22 @@ public interface ItemDao {
      */
     int executeIn(String getTable,String getID,Connection conn);
 
+
+
+    /*****************新版配套出库*****************/
+    /**
+     *
+     * @param orderId
+     * @return
+     */
+    InvMoveOrder getInvMoveOrderById(String orderId);
+
+
+    InvMoveOrderView getInvMoveOrderViewById(String orderId);
+
+
+    String getTiitm001_KLTCByItemNumber(String itemNumber);
+
+
+    BigDecimal getAvailable(InvInventory invInventory);
 }
